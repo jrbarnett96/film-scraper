@@ -6,8 +6,8 @@ import requests
 # example usage
 # http://www.omdbapi.com/?t=star+wars&apikey=3e6165e0
 
-url = "http://www.omdbapi.com/?t=star+wars&apikey=3e6165e0"
+url = "http://www.omdbapi.com/?t=good+will+hunting&apikey=3e6165e0"
 
 
-r = requests.get(url)
-print(r.json())
+json = requests.get(url).json()
+print(json)
