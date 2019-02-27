@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d39e4fe8-de66-4879-98de-875e535aa4b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BoxOfficeSpider.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbed.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbed.py" afterDir="false" />
-    </list>
+    <list default="true" id="d39e4fe8-de66-4879-98de-875e535aa4b4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,25 +23,25 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="2" />
-          <entry key="py" value="4" />
+          <entry key="py" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="2" />
-          <entry key="Python" value="4" />
+          <entry key="Python" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="15" />
-          <entry key="py" value="1953" />
+          <entry key="py" value="2005" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="15" />
-          <entry key="Python" value="1953" />
+          <entry key="Python" value="2005" />
         </counts>
       </usages-collector>
     </session>
@@ -67,11 +63,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BoxOfficeSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="24" selection-end-column="73" />
+            <state relative-caret-position="226">
+              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1551230846087" expanded="true" signature="167:168" ph="..." />
               </folding>
             </state>
           </provider>
@@ -80,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OMDBAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="353">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -101,9 +96,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/OMDBAPI.py" />
         <option value="$PROJECT_DIR$/QoutesSpider.py" />
         <option value="$PROJECT_DIR$/testbed.py" />
+        <option value="$PROJECT_DIR$/OMDBAPI.py" />
+        <option value="$PROJECT_DIR$/BoxOfficeSpider.py" />
       </list>
     </option>
   </component>
@@ -149,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.OMDBAPI">
+  <component name="RunManager" selected="Python.BoxOfficeSpider">
     <configuration name="BoxOfficeSpider" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conjon-zombocom" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -220,8 +216,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.OMDBAPI" />
         <item itemvalue="Python.BoxOfficeSpider" />
+        <item itemvalue="Python.OMDBAPI" />
         <item itemvalue="Python.testbed" />
       </list>
     </recent_temporary>
@@ -241,13 +237,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -291,15 +288,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OMDBAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quotes-humor.html">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OMDBAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testbed.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -313,11 +310,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="24" selection-end-column="73" />
+        <state relative-caret-position="226">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1551230846087" expanded="true" signature="167:168" ph="..." />
           </folding>
         </state>
       </provider>
