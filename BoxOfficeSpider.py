@@ -1,22 +1,41 @@
 import scrapy
-from twisted.internet import reactor
-from scrapy.crawler import CrawlerRunner
-from scrapy.utils.log import configure_logging
-from scrapy.selector import Selector
+from scrapy.crawler import CrawlerProcess
+
+class DmozItem(scrapy.Item):
+    """
+    Data structure containing stuff
+    """
+    title = scrapy.Field()
+    link = scrapy.Field()
+    desc = scrapy.Field()
 
 class BoxOfficeSpider(scrapy.Spider):
+    """
+    Spider
+    """
     name = "boxoffice"
+    allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
-        "www.boxofficemojo.com/alltime/world/",
+        "http://www.boxofficemojo.com/alltime/world/",
+        "http://www.boxofficemojo.com/alltime/",
     ]
 
     def parse(self, response):
-        print(Selector(response=response).xpath('//title/text()').get())
+        """
+        This is where the fun begins
+        """
+        for sel in response.xpath('//ul/li'):
+            item = DmozItem()
+            item['title'] = sel.xpath('a/text()').extract()
+            item['link'] = sel.xpath('a/@href').extract()
+            item['desc'] = sel.xpath('text()').extract()
+            print(item)
+            yield item
 
-#running without command line
-configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
-runner = CrawlerRunner()
-d = runner.crawl(BoxOfficeSpider)
 
-d.addBoth(lambda _: reactor.stop())
-reactor.run() # the script will block here until the crawling is finished
+# running the spider
+process = CrawlerProcess({
+    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+})
+process.crawl(BoxOfficeSpider)
+process.start() # the script will block here until the crawling is finished
