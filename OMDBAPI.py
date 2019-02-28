@@ -1,4 +1,5 @@
 import requests
+import sys
 
 # baseurl = "http://www.omdbapi.com/?t={}&apikey=3e6165e0"
 # conner_api_key  = 3e6165e0
@@ -6,24 +7,42 @@ import requests
 # example usage
 # http://www.omdbapi.com/?t=star+wars&apikey=3e6165e0
 
-omdb_title_url = "http://www.omdbapi.com/?t={}&apikey=3e6165e0"
+'''
+Searches for FILMS in FILM_LIST using the OMDB API, given an API key. When a film is found, 
+downloads its JSON file and enters it into a dictionary indexed by film name. Prints the 
+contents of the dictionary.
+'''
 
-# film_list can be generated from scrapy top grossing movie list
-film_list = {'star wars', 'good will hunting'}  # notice, is set
-film_dictionary = {}
 
-# requesting omdb data
-for film in film_list:
-    newurl = omdb_title_url.format("+".join(film.split()))
-    # ^ title to url __+__+__ format
-    json = requests.get(newurl).json()  # requests url, json back
-    film_dictionary[json["Title"]] = json  # append film to dictionary
-    # ^ may replace film dictionary title key with imdb code
+def omdb_data_collector(film_list, api_key):
 
-    # ~~~~financial data scraping~~~~~
-    # insert FINANCIAL DATA as dict keys ('Budget', 'Domestic', etc)
-    # There is already a key called 'BoxOffice' with value 'N/A'
+    """ Replace the API field with api_key. """
+    url = "http://www.omdbapi.com/?t={}&apikey={}"
+    url = url.format('{}', api_key)
 
-# print
-for elems in film_dictionary:
-    print(elems, film_dictionary[elems])
+    film_dict = {}
+
+    """ For each film in film_list, download its JSON file and place it in a dictionary. """
+    for film in film_list:
+
+        url = url.format("+".join(film.split()))
+        json = requests.get(url).json()
+        film_dict[film] = json
+
+        # ~~~~financial data scraping~~~~~
+        # insert FINANCIAL DATA as dict keys ('Budget', 'Domestic', etc)
+        # There is already a key called 'BoxOffice' with value 'N/A'
+
+    """ Print all keys and associated JSON files in film_dict. """
+    for elems in film_dict:
+        print(elems, film_dict[elems])
+
+
+if __name__ == "__main__":
+
+    key = input("Please input your OMDB API key:")
+    films = input("Please input desired films in the following format")
+    key = sys.argv[2]
+    omdb_data_collector(films, key)
+
+
