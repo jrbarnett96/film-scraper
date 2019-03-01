@@ -17,20 +17,14 @@ class BoxOfficeSpider(scrapy.Spider):
     allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
         "http://www.boxofficemojo.com/alltime/world/",
-        "http://www.boxofficemojo.com/alltime/",
     ]
 
     def parse(self, response):
         """
         This is where the fun begins
         """
-        for sel in response.xpath('//ul/li'):
-            item = DmozItem()
-            item['title'] = sel.xpath('a/text()').extract()
-            item['link'] = sel.xpath('a/@href').extract()
-            item['desc'] = sel.xpath('text()').extract()
-            print(item)
-            yield item
+        tr_elements = response.xpath('//tr')
+        yield tr_elements
 
 
 # running the spider

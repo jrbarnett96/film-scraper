@@ -2,3 +2,6 @@
 .DS_Store
 .idea/workspace.xml
 *.xml
+*.iml
+.idea/workspace.xml
+*.xml
