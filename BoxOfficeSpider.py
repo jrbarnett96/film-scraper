@@ -23,13 +23,12 @@ class BoxOfficeSpider(scrapy.Spider):
         """
         This is where the fun begins
         """
-        path = "/html/body/div[1]/div[3]/div[2]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/font/a/b"
-        for sel in response.xpath(path):
+        for sel in response.xpath('//td/tr'):
             item = DmozItem()
             item['title'] = sel.xpath('a/text()').extract()
             item['link'] = sel.xpath('a/@href').extract()
             item['desc'] = sel.xpath('text()').extract()
-
+            print(item)
             yield item
 
 
