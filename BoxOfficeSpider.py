@@ -4,7 +4,7 @@ import bs4
 
 class BoxOfficeItem(scrapy.Item):
     """
-    Data structure containing stuff
+    Data structure containing scrapy fields
     """
     rank = scrapy.Field()
     title = scrapy.Field()
@@ -19,6 +19,7 @@ class BoxOfficeItem(scrapy.Item):
     varlist = ("rank", "title", "studio", "worldwide", "domestic", "domestic_share",
             "overseas", "overseas_share", "year")
 
+
     def __print__(self):
         print(self.keys(), self.values())
 
@@ -26,7 +27,7 @@ class BoxOfficeSpider(scrapy.Spider):
     """
     Spider
     """
-    name = "boxoffice"
+    name = "mojopspider"
     allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
         "http://www.boxofficemojo.com/alltime/world/",
@@ -37,6 +38,8 @@ class BoxOfficeSpider(scrapy.Spider):
         This is where the fun begins
         """
 
+        # ***This section is independent of Scrapy*****
+        films = []
         table = bs4.BeautifulSoup(str(response.body), features="lxml")
         # "table" is bs4 type
         table_row_all = table.findAll("tr")[2:]  # slice removes non table text
@@ -44,18 +47,18 @@ class BoxOfficeSpider(scrapy.Spider):
 
         for html_row in table_row_all:
             tds_all.append([td.get_text() for td in html_row.findAll("td")])
-        films = []
+        # ^^^^This section is independent of Scrapy^^^^^
+
+        # Converting 2d array into Scrapy Item
         for film in tds_all[1:]:  # removes categories row
             boitem = BoxOfficeItem()
             for i in range(len(boitem.varlist)):
                 boitem[str(boitem.varlist[i])] = film[i]
-            films.append(boitem)
-            for film in films:
-                print(film)
+            yield boitem
 
-# running the spider
-process = CrawlerProcess({
-    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-})
-process.crawl(BoxOfficeSpider)
-process.start() # the script will block here until the crawling is finished
+
+if __name__ == "__main__":
+    crawler = CrawlerProcess({
+        'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'})
+    crawler.crawl(BoxOfficeSpider())
+    crawler.start()
