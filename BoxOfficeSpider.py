@@ -1,13 +1,26 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
+import bs4
 
-class DmozItem(scrapy.Item):
+class BoxOfficeItem(scrapy.Item):
     """
     Data structure containing stuff
     """
+    rank = scrapy.Field()
     title = scrapy.Field()
-    link = scrapy.Field()
-    desc = scrapy.Field()
+    studio = scrapy.Field()
+    worldwide = scrapy.Field()
+    domestic = scrapy.Field()
+    domestic_share = scrapy.Field()
+    overseas = scrapy.Field()
+    overseas_share = scrapy.Field()
+    year = scrapy.Field()
+
+    varlist = ("rank", "title", "studio", "worldwide", "domestic", "domestic_share",
+            "overseas", "overseas_share", "year")
+
+    def __print__(self):
+        print(self.keys(), self.values())
 
 class BoxOfficeSpider(scrapy.Spider):
     """
@@ -23,14 +36,22 @@ class BoxOfficeSpider(scrapy.Spider):
         """
         This is where the fun begins
         """
-        for sel in response.xpath('//td/tr'):
-            item = DmozItem()
-            item['title'] = sel.xpath('a/text()').extract()
-            item['link'] = sel.xpath('a/@href').extract()
-            item['desc'] = sel.xpath('text()').extract()
-            print(item)
-            yield item
 
+        table = bs4.BeautifulSoup(str(response.body), features="lxml")
+        # "table" is bs4 type
+        table_row_all = table.findAll("tr")[2:]  # slice removes non table text
+        tds_all = []
+
+        for html_row in table_row_all:
+            tds_all.append([td.get_text() for td in html_row.findAll("td")])
+        films = []
+        for film in tds_all[1:]:  # removes categories row
+            boitem = BoxOfficeItem()
+            for i in range(len(boitem.varlist)):
+                boitem[str(boitem.varlist[i])] = film[i]
+            films.append(boitem)
+            for film in films:
+                print(film)
 
 # running the spider
 process = CrawlerProcess({
