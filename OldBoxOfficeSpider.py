@@ -4,7 +4,7 @@ import bs4
 
 class BoxOfficeItem(scrapy.Item):
     """
-    Data structure containing scrapy fields
+    Data structure containing movie_scraper fields
     """
     rank = scrapy.Field()
     title = scrapy.Field()

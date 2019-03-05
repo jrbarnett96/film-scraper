@@ -10,7 +10,7 @@ from scrapy import signals
 
 class MovieScrapingSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
-    # scrapy acts as if the spider middleware does not modify the
+    # movie_scraper acts as if the spider middleware does not modify the
     # passed objects.
 
     @classmethod
@@ -58,7 +58,7 @@ class MovieScrapingSpiderMiddleware(object):
 
 class MovieScrapingDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
-    # scrapy acts as if the downloader middleware does not modify the
+    # movie_scraper acts as if the downloader middleware does not modify the
     # passed objects.
 
     @classmethod
