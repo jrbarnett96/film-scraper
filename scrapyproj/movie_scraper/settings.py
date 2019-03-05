@@ -14,13 +14,9 @@ BOT_NAME = 'movie_scraper'
 SPIDER_MODULES = ['movie_scraper.spiders']
 NEWSPIDER_MODULE = 'movie_scraper.spiders'
 
-ITEM_PIPELINES = {
-    'movie_scraper.pipelines.JsonWriterPipeline': 1,
-}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = {'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT ' \
-                           '5.1)'}
+#USER_AGENT = 'movie_scraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -51,26 +47,26 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'movie_scraper.middlewares.MovieScrapingSpiderMiddleware': 543,
+#    'movie_scraper.middlewares.MovieScraperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'movie_scraper.middlewares.MovieScrapingDownloaderMiddleware': 543,
+#    'movie_scraper.middlewares.MovieScraperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
-#    'movie_scraper.extensions.telnet.TelnetConsole': None,
+#    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'movie_scraper.pipelines.MovieScrapingPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'movie_scraper.pipelines.JsonWriterPipeline': 200,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -91,4 +87,4 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'movie_scraper.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'

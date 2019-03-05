@@ -27,7 +27,7 @@ class BoxOfficeSpider(scrapy.Spider):
     """
     Spider
     """
-    name = "mojopspider"
+    name = "oldspider"
     allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
         "http://www.boxofficemojo.com/alltime/world/",
