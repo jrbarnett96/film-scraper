@@ -1,34 +1,17 @@
+from __future__ import absolute_import
 import scrapy
-from scrapy.crawler import CrawlerProcess
+#from scrapy.crawler import CrawlerProcess
 import bs4
+from movie_scraper.items import * #let it be, necessary for now with scrapy
 
+# working relatively, except troublesome import
+# in future convert section noted below away from bs4 and to xpath
 
-class BoxOfficeItem(scrapy.Item):
-    """
-    Data structure containing scrapy fields
-    """
-    rank = scrapy.Field()
-    title = scrapy.Field()
-    studio = scrapy.Field()
-    worldwide = scrapy.Field()
-    domestic = scrapy.Field()
-    domestic_share = scrapy.Field()
-    overseas = scrapy.Field()
-    overseas_share = scrapy.Field()
-    year = scrapy.Field()
-
-    varlist = ("rank", "title", "studio", "worldwide", "domestic", "domestic_share",
-               "overseas", "overseas_share", "year")
-
-    def __print__(self):
-        print(self.keys(), self.values())
-
-
-class BoxOfficeSpider(scrapy.Spider):
+class mojospider(scrapy.Spider):
     """
     Spider
     """
-    name = "mojopspider"
+    name = "mojospider"
     allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
         "http://www.boxofficemojo.com/alltime/world/",
@@ -52,14 +35,12 @@ class BoxOfficeSpider(scrapy.Spider):
 
         # Converting 2d array into Scrapy Item
         for film in tds_all[1:]:  # removes categories row
-            boitem = BoxOfficeItem()
-            for i in range(len(boitem.varlist)):
+            boitem = MovieScraperItem()
+            for i in range(len(boitem.fields)):
                 boitem[str(boitem.varlist[i])] = film[i]
             yield boitem
 
-
 if __name__ == "__main__":
-    crawler = CrawlerProcess({
-        'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'})
-    crawler.crawl(BoxOfficeSpider())
-    crawler.start()
+    boitem = MovieScraperItem()
+    boitem['title'] = "test"
+    print(boitem["title"])
