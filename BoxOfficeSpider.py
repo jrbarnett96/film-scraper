@@ -2,6 +2,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 import bs4
 
+
 class BoxOfficeItem(scrapy.Item):
     """
     Data structure containing scrapy fields
@@ -17,11 +18,11 @@ class BoxOfficeItem(scrapy.Item):
     year = scrapy.Field()
 
     varlist = ("rank", "title", "studio", "worldwide", "domestic", "domestic_share",
-            "overseas", "overseas_share", "year")
-
+               "overseas", "overseas_share", "year")
 
     def __print__(self):
         print(self.keys(), self.values())
+
 
 class BoxOfficeSpider(scrapy.Spider):
     """
