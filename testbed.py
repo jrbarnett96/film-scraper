@@ -3,13 +3,17 @@ import json
 import OmdbScraper
 #  decision tree learning
 
-features = [[140, 1], [175, 0],[175, 0]] # all the other data
-labels = [0, 1, 3]  # gross income
 
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(features, labels)
 
-#print(clf.predict([[140,0]]))
+def convert_genres_to_numeral(mylist, genreset): # needs work
+
+    for elem in mylist:
+        if elem in mylist:
+            #if elem != "N/A":
+            genreset.append(elem)
+    numeral = genreset.index(mylist[-1])
+    print(genreset)
+    return numeral, genreset
 
 
 with open("items.json") as jsonfile:
@@ -18,19 +22,24 @@ with open("items.json") as jsonfile:
     for line in jsonfile:
         films.append(json.loads(line))
 
-labels.clear()
-features.clear()
+labels = []
+features = []
+genreset = []
 
 for movie in films:
     film_dict = OmdbScraper.omdb_data_collector(movie["title"])
-    mylist = film_dict[movie["title"]]["Genre"]
-    # genre must be numerized
-    features.append([movie["worldwide"],movie["domestic"]])
-    print(labels)
-    print(features)
+    if "Genre" in film_dict[movie["title"]].keys():
+        mylist = list(film_dict[movie["title"]]["Genre"].replace(",", "").split())
+        genre,genreset = convert_genres_to_numeral(mylist,genreset)
+        if genre != "N/A":
+            labels.append(genre)
+            features.append([int(movie["worldwide"][1:-2].replace(',','')),
+                         int(movie["domestic"][1:-2].replace(',',''))])
+            print(labels)
+            print(features)
 
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(features, labels)
 
-print(clf.predict([[140,0]]))
+print(clf.predict([[1000000000,200000000]]))
 
