@@ -4,7 +4,6 @@ import OmdbScraper
 #  decision tree learning
 
 
-
 def convert_genres_to_numeral(mylist, genreset): # needs work
 
     for elem in mylist:
@@ -18,7 +17,6 @@ def convert_genres_to_numeral(mylist, genreset): # needs work
 
 with open("items.json") as jsonfile:
     films = []
-    #numbers = json.loads(jsonfile.read())
     for line in jsonfile:
         films.append(json.loads(line))
 
