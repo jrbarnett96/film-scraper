@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def omdb_data_collector(film_list=("good will hunting"), api_key="3e6165e0"):
+def omdb_data_collector(film, api_key="3e6165e0"):
     """ Return a mapping of films in FILM_LIST to jsons gathered from OMDB's API with API_KEY. """
 
 
@@ -11,13 +11,11 @@ def omdb_data_collector(film_list=("good will hunting"), api_key="3e6165e0"):
     url = url.format('{}', api_key)
 
     film_dict = {}
-
     """ For each film in film_list, download its JSON file and place it in a dictionary. """
-    for film in film_list:
 
-        url = url.format("+".join(film.split()))
-        omdb_json = requests.get(url).json()
-        film_dict[film] = omdb_json
+    url = url.format("+".join(film.split()))
+    omdb_json = requests.get(url).json()
+    film_dict[film] = omdb_json
 
     return film_dict
 
