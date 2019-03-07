@@ -7,7 +7,7 @@
 
 import scrapy
 
-# id like to be able to fix the script in mojospider as tonot ahve to rely
+# id like to be able to fix the script in mojospider as to not have to rely
 # on varlist, which is really just a workaround. attempting to iterate
 # through MovieScraperItem.fields gives them out of order, and the
 # return from mojo's table is an ordered, unlabeled list

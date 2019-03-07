@@ -1,16 +1,16 @@
 from __future__ import absolute_import
 import scrapy
 #from scrapy.crawler import CrawlerProcess
+from scrapy.loader import ItemLoader
+from movie_scraper.items import *
 import bs4
-from movie_scraper.items import * #let it be, necessary for now with scrapy
 
 # working relatively, except troublesome import
 # in future convert section noted below away from bs4 and to xpath
 
 class mojospider(scrapy.Spider):
-    """
-    Spider
-    """
+    """ Scrapes film financial data from BoxOfficeMojo's all-time world record page. """
+
     name = "mojospider"
     allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
@@ -18,27 +18,29 @@ class mojospider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        """
-        This is where the fun begins
-        """
+        """ From each film row in the alltime list, parses a film's financial data into an Item. """
 
-        # ***This section is independent of Scrapy*****
-        films = []
-        table = bs4.BeautifulSoup(str(response.body), features="lxml")
-        # "table" is bs4 type
-        table_row_all = table.findAll("tr")[2:]  # slice removes non table text
-        tds_all = []
+        """ Load web page, find all instances of table rows. """
+        record_page = bs4.BeautifulSoup(str(response.body), "html.parser")
+        record_table = record_page.findAll("tr")
+        rt_categories = record_table[2].findAll("a")
+        rt_data = record_table[3:]
 
-        for html_row in table_row_all:
-            tds_all.append([td.get_text() for td in html_row.findAll("td")])
-        # ^^^^This section is independent of Scrapy^^^^^
+        """ Reshape categories for easier indexing. """
+        rt_categories = [rt_categories[i].string.lower() for i in range(len(rt_categories))]
+        rt_categories[5] = 'domestic share'
+        rt_categories[7] = 'overseas share'
+        rt_categories[8] = 'year'
 
-        # Converting 2d array into Scrapy Item
-        for film in tds_all[1:]:  # removes categories row
-            boitem = MovieScraperItem()
-            for i in range(len(boitem.fields)):
-                boitem[str(boitem.varlist[i])] = film[i]
-            yield boitem
+        """ For each row in the table, create an Item using ItemLoader. """
+        for row in rt_data:
+            row_data = row.findAll("td")
+            film_record = ItemLoader(MovieScraperItem(), selector=row)
+            """ Add columns according to the corresponding column name in RT_CATEGORIES. """
+            for i in range(len(row_data)):
+                film_record.add_value(rt_categories[i], row_data[i].string)
+            yield film_record.load_item()
+
 
 if __name__ == "__main__":
     boitem = MovieScraperItem()
