@@ -29,8 +29,8 @@ class FilmSpider(scrapy.Spider):
 
         """ Reshape categories for easier indexing. """
         rt_categories = [rt_categories[i].string.lower() for i in range(len(rt_categories))]
-        rt_categories[5] = 'domestic share'
-        rt_categories[7] = 'overseas share'
+        rt_categories[5] = 'domestic_share'
+        rt_categories[7] = 'overseas_share'
         rt_categories[8] = 'year'
 
         """ For each row in the table, create an Item using ItemLoader. """
