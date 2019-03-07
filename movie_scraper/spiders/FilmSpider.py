@@ -1,15 +1,16 @@
 from __future__ import absolute_import
 import scrapy
-#from scrapy.crawler import CrawlerProcess
+# from scrapy.crawler import CrawlerProcess
 from scrapy.loader import ItemLoader
 from movie_scraper.items import *
 import bs4
+import requests
 
 # working relatively, except troublesome import
-# in future convert section noted below away from bs4 and to xpath
 
-class mojospider(scrapy.Spider):
-    """ Scrapes film financial data from BoxOfficeMojo's all-time world record page. """
+
+class FilmSpider(scrapy.Spider):
+    """ Scrapes financial data from BoxOfficeMojo's all-time world record page. """
 
     name = "mojospider"
     allowed_domains = ["boxofficemojo.com/"]
@@ -35,14 +36,16 @@ class mojospider(scrapy.Spider):
         """ For each row in the table, create an Item using ItemLoader. """
         for row in rt_data:
             row_data = row.findAll("td")
-            film_record = ItemLoader(MovieScraperItem(), selector=row)
+            film_record = ItemLoader(MovieItem(), response=response)
+
             """ Add columns according to the corresponding column name in RT_CATEGORIES. """
             for i in range(len(row_data)):
                 film_record.add_value(rt_categories[i], row_data[i].string)
+
+            """ Query OMDB API for categorical data, store response in dictionary format. """
+            film_title = "+".join(row_data[1].string.split())
+            omdb_query = "http://www.omdbapi.com/?apikey=3e6165e0&t={}".format(film_title)
+            omdb_response = requests.get(omdb_query).json()
+            film_record.add_value('categorical_data', omdb_response)
+
             yield film_record.load_item()
-
-
-if __name__ == "__main__":
-    boitem = MovieScraperItem()
-    boitem['title'] = "test"
-    print(boitem["title"])

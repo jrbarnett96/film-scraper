@@ -10,15 +10,15 @@
 
 import json
 
-class JsonWriterPipeline(object):
 
-    def open_spider(self, spider):
-        self.file = open('items.json', 'w')
-
-    def close_spider(self, spider):
-        self.file.close()
+class BoxOfficeMojoPipeline(object):
+    """ Pipeline for processing Items scraped from Box Office Mojo box office records. """
 
     def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + "\n"
-        self.file.write(line)
-        return item
+        return
+
+    def open_spider(self, spider):
+        return
+
+    def close_spider(self, spider):
+        return
