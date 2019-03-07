@@ -16,11 +16,12 @@ class BoxOfficeMojoPipeline(object):
             raise DropItem
         else:
             """ Cast numerical data into floats. """
-            item['worldwide'] = float(item['worldwide'][1:])
-            item['domestic'] = float(item['domestic'][1:])
-            item['domestic_share'] = float(item['domestic_share'][:-1])
-            item['overseas'] = float(item['overseas'][1:])
-            item['overseas_share'] = float[item['overseas_share'][1:]]
+            numerical_cats = ['worldwide', 'domestic', 'overseas']
+            for i in numerical_cats:
+                item[i] = float(item[i][1:])
+            percent_cats = ['domestic_share', 'overseas_share']
+            for j in percent_cats:
+                item[i] = float(item[i][:-1])
             if len(item['year']) > 4:
                 item['year'] = item['year'][:-1]
             return item
@@ -34,3 +35,22 @@ class OMDBPipeline(object):
             raise DropItem
         else:
             categorical = item.get('categorical_data')
+
+            """ Remove extraneous categories. """
+            categories_to_remove = ['Language', 'Country', 'Poster', 'DVD', 'Type', 'Website', 'Response',
+                                    'Title', 'Year', 'BoxOffice']
+            for i in categories_to_remove:
+                categorical.pop(i)
+
+            """ Cast numerical data into floats. """
+            categorical['Runtime'] = float(categorical['Runtime'].split()[0])
+            categorical['Genre'] = categorical['Genre'].split(', ')
+            categorical['Metascore'] = float(categorical['Metascore'])
+            categorical['imdbRating'] = float(categorical['imdbRating'])
+            categorical['imdbVotes'] = float("".join(categorical['imdbVotes'].split(',')))
+
+            """ todo: join categorical data with BOM data into one dictionary. """
+
+            """ todo: take dictionary and export it into 1 json (another pipeline?) """
+
+            return item
