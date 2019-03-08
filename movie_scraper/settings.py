@@ -71,7 +71,6 @@ ROBOTSTXT_OBEY = True
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'movie_scraper.pipelines.BoxOfficeMojoPipeline': 200,
-    'movie_scraper.pipelines.OMDBPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -27,6 +27,7 @@ class BoxOfficeMojoPipeline(object):
             return item
 
 
+# no longer needed
 class OMDBPipeline(object):
     """ Pipeline for processing categorical data from OMDB,
     reinserting the processed data. """
@@ -50,10 +51,5 @@ class OMDBPipeline(object):
             categorical['Metascore'] = float(categorical['Metascore'])
             categorical['imdbRating'] = float(categorical['imdbRating'])
             categorical['imdbVotes'] = float("".join(categorical['imdbVotes'].split(',')))
-
-            """ todo: join categorical data with BOM data into one dictionary. """
-
-
-            """ todo: take dictionary and export it into 1 json (another pipeline?) """
 
             return item

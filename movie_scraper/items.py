@@ -9,7 +9,6 @@ import scrapy
 from scrapy.loader.processors import TakeFirst
 
 
-
 class MovieItem(scrapy.Item):
     """ Custom Item representing a row in Box Office Mojo's record table. """
 
@@ -24,15 +23,3 @@ class MovieItem(scrapy.Item):
     year = scrapy.Field(output_processor=TakeFirst())
 
     categorical_data = scrapy.Field(output_processor=TakeFirst())
-
-
-class JsonItem(scrapy.Item):
-    """
-    Data structure containing movie_scraper fields
-    """
-    json = scrapy.Field()
-
-
-if __name__ == "__main__":
-    item = MovieScraperItem()
-    print(item.fields)

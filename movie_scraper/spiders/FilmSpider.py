@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-import scrapy
-# from scrapy.crawler import CrawlerProcess
 from scrapy.loader import ItemLoader
 from movie_scraper.items import *
 import bs4
