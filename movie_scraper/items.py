@@ -31,3 +31,4 @@ class JsonItem(scrapy.Item):
     Data structure containing movie_scraper fields
     """
     json = scrapy.Field()
+

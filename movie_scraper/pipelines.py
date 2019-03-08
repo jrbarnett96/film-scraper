@@ -18,7 +18,7 @@ class BoxOfficeMojoPipeline(object):
             """ Cast numerical data into floats. """
             numerical_cats = ['worldwide', 'domestic', 'overseas']
             for i in numerical_cats:
-                item[i] = float(item[i][1:])
+                item[i] = float(item[i][1:].replace(",", ""))
             percent_cats = ['domestic_share', 'overseas_share']
             for j in percent_cats:
                 item[j] = float(item[j][:-1])
@@ -27,6 +27,7 @@ class BoxOfficeMojoPipeline(object):
             return item
 
 
+# no longer needed
 class OMDBPipeline(object):
     """ Pipeline for processing categorical data from OMDB,
     reinserting the processed data. """
@@ -50,10 +51,5 @@ class OMDBPipeline(object):
             categorical['Metascore'] = float(categorical['Metascore'])
             categorical['imdbRating'] = float(categorical['imdbRating'])
             categorical['imdbVotes'] = float("".join(categorical['imdbVotes'].split(',')))
-
-            """ todo: join categorical data with BOM data into one dictionary. """
-
-
-            """ todo: take dictionary and export it into 1 json (another pipeline?) """
 
             return item
