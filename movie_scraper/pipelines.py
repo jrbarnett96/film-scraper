@@ -21,7 +21,7 @@ class BoxOfficeMojoPipeline(object):
                 item[i] = float(item[i][1:])
             percent_cats = ['domestic_share', 'overseas_share']
             for j in percent_cats:
-                item[i] = float(item[i][:-1])
+                item[j] = float(item[j][:-1])
             if len(item['year']) > 4:
                 item['year'] = item['year'][:-1]
             return item

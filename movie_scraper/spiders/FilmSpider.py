@@ -36,16 +36,16 @@ class FilmSpider(scrapy.Spider):
         """ For each row in the table, create an Item using ItemLoader. """
         for row in rt_data:
             row_data = row.findAll("td")
-            film_record = ItemLoader(MovieItem(), response=response)
+            film_record = MovieItem()
 
             """ Add columns according to the corresponding column name in RT_CATEGORIES. """
             for i in range(len(row_data)):
-                film_record.add_value(rt_categories[i], row_data[i].string)
+                film_record[rt_categories[i]] = row_data[i].string
 
             """ Query OMDB API for categorical data, store response in dictionary format. """
             film_title = "+".join(row_data[1].string.split())
             omdb_query = "http://www.omdbapi.com/?apikey=3e6165e0&t={}".format(film_title)
             omdb_response = requests.get(omdb_query).json()
-            film_record.add_value('categorical_data', omdb_response)
+            film_record['categorical_data'] = omdb_response
 
-            yield film_record.load_item()
+            yield film_record

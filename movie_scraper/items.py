@@ -11,6 +11,7 @@ import scrapy
 class MovieItem(scrapy.Item):
     """ Custom Item representing a row in Box Office Mojo's record table. """
 
+    """ Box Office Mojo data. """
     rank = scrapy.Field()
     title = scrapy.Field()
     studio = scrapy.Field()
@@ -21,6 +22,7 @@ class MovieItem(scrapy.Item):
     overseas_share = scrapy.Field()
     year = scrapy.Field()
 
+    """ OMDB data. """
     categorical_data = scrapy.Field()
 
 
@@ -29,8 +31,3 @@ class JsonItem(scrapy.Item):
     Data structure containing movie_scraper fields
     """
     json = scrapy.Field()
-
-
-if __name__ == "__main__":
-    item = MovieScraperItem()
-    print(item.fields)
