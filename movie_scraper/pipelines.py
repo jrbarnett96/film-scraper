@@ -18,10 +18,10 @@ class BoxOfficeMojoPipeline(object):
             """ Cast numerical data into floats. """
             numerical_cats = ['worldwide', 'domestic', 'overseas']
             for i in numerical_cats:
-                item[i] = float(item[i][1:])
+                item[i] = item[i][1:]
             percent_cats = ['domestic_share', 'overseas_share']
             for j in percent_cats:
-                item[i] = float(item[i][:-1])
+                item[j] = item[j][:-1]
             if len(item['year']) > 4:
                 item['year'] = item['year'][:-1]
             return item

@@ -6,22 +6,24 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy.loader.processors import TakeFirst
+
 
 
 class MovieItem(scrapy.Item):
     """ Custom Item representing a row in Box Office Mojo's record table. """
 
-    rank = scrapy.Field()
-    title = scrapy.Field()
-    studio = scrapy.Field()
-    worldwide = scrapy.Field()
-    domestic = scrapy.Field()
-    domestic_share = scrapy.Field()
-    overseas = scrapy.Field()
-    overseas_share = scrapy.Field()
-    year = scrapy.Field()
+    rank = scrapy.Field(output_processor=TakeFirst())
+    title = scrapy.Field(output_processor=TakeFirst())
+    studio = scrapy.Field(output_processor=TakeFirst())
+    worldwide = scrapy.Field(output_processor=TakeFirst())
+    domestic = scrapy.Field(output_processor=TakeFirst())
+    domestic_share = scrapy.Field(output_processor=TakeFirst())
+    overseas = scrapy.Field(output_processor=TakeFirst())
+    overseas_share = scrapy.Field(output_processor=TakeFirst())
+    year = scrapy.Field(output_processor=TakeFirst())
 
-    categorical_data = scrapy.Field()
+    categorical_data = scrapy.Field(output_processor=TakeFirst())
 
 
 class JsonItem(scrapy.Item):
