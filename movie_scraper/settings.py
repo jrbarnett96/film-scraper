@@ -14,6 +14,11 @@ BOT_NAME = 'movie_scraper'
 SPIDER_MODULES = ['movie_scraper.spiders']
 NEWSPIDER_MODULE = 'movie_scraper.spiders'
 
+FEED_EXPORTERS = {
+ 'jsonlines': 'scrapy.contrib.exporter.JsonLinesItemExporter',
+}
+FEED_FORMAT = 'jsonlines'
+FEED_URI = "films.json"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'movie_scraper (+http://www.yourdomain.com)'
@@ -22,7 +27,7 @@ NEWSPIDER_MODULE = 'movie_scraper.spiders'
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+#CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -65,7 +70,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'movie_scraper.pipelines.JsonWriterPipeline': 200,
+    'movie_scraper.pipelines.BoxOfficeMojoPipeline': 200,
+    'movie_scraper.pipelines.OMDBPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -12,7 +12,7 @@ import requests
 class FilmSpider(scrapy.Spider):
     """ Scrapes financial data from BoxOfficeMojo's all-time world record page. """
 
-    name = "mojospider"
+    name = "FilmSpider"
     allowed_domains = ["boxofficemojo.com/"]
     start_urls = [
         "http://www.boxofficemojo.com/alltime/world/",

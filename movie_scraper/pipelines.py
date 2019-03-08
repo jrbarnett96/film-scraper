@@ -28,7 +28,8 @@ class BoxOfficeMojoPipeline(object):
 
 
 class OMDBPipeline(object):
-    """ Pipeline for processing categorical data from OMDB, reinserting the processed data. """
+    """ Pipeline for processing categorical data from OMDB,
+    reinserting the processed data. """
 
     def process_item(self, item, spider):
         if item.get('categorical_data')['Response'] == 'False':
@@ -37,7 +38,8 @@ class OMDBPipeline(object):
             categorical = item.get('categorical_data')
 
             """ Remove extraneous categories. """
-            categories_to_remove = ['Language', 'Country', 'Poster', 'DVD', 'Type', 'Website', 'Response',
+            categories_to_remove = ['Language', 'Country', 'Poster', 'DVD',
+                                    'Type', 'Website', 'Response',
                                     'Title', 'Year', 'BoxOffice']
             for i in categories_to_remove:
                 categorical.pop(i)
@@ -50,6 +52,7 @@ class OMDBPipeline(object):
             categorical['imdbVotes'] = float("".join(categorical['imdbVotes'].split(',')))
 
             """ todo: join categorical data with BOM data into one dictionary. """
+
 
             """ todo: take dictionary and export it into 1 json (another pipeline?) """
 
