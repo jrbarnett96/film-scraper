@@ -27,7 +27,6 @@ class BoxOfficeMojoPipeline(object):
             return item
 
 
-# no longer needed
 class OMDBPipeline(object):
     """ Pipeline for processing categorical data from OMDB,
     reinserting the processed data. """
@@ -36,6 +35,7 @@ class OMDBPipeline(object):
         if item.get('categorical_data')['Response'] == 'False':
             raise DropItem
         else:
+            """ Retrieve the OMDB dictionary from the MovieItem. """
             categorical = item.get('categorical_data')
 
             """ Remove extraneous categories. """
@@ -52,4 +52,9 @@ class OMDBPipeline(object):
             categorical['imdbRating'] = float(categorical['imdbRating'])
             categorical['imdbVotes'] = float("".join(categorical['imdbVotes'].split(',')))
 
-            return item
+            item_dict = dict(item)
+            item_dict.pop('categorical')
+            for i in categorical.keys():
+                item_dict[i] = categorical[i]
+
+            return item_dict
