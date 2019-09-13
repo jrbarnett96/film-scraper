@@ -16,3 +16,8 @@ To use, run main.py in the conjon_zombocom folder. You will be asked to provide 
 collected and sent to the data/ folder. 
 
 Analysis programs are forthcoming. 
+
+Possible ML/AI
+- Basic Linear Regression - Finding Trends based on variables scaled against net box office revenue 
+- k-Nearest Neighbor (kNN) / k-Means clustering - True-Genre Mapping (Finding Netflix Style Subgenres)
+- Dimensionality Reduction Algorithms (more research required for specifics)
