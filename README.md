@@ -19,5 +19,8 @@ Analysis programs are forthcoming.
 
 Possible ML/AI
 - Basic Linear Regression - Finding Trends based on variables scaled against net box office revenue 
-- k-Nearest Neighbor (kNN) / k-Means clustering - True-Genre Mapping (Finding Netflix Style Subgenres)
+  - compare prediction on limited data set with full data set
+- k-Nearest Neighbor (kNN) /  - True-Genre Mapping (Finding Netflix Style Subgenres)
+- k-Means clustering - Categorical Variable Maping
+
 - Dimensionality Reduction Algorithms (more research required for specifics)
