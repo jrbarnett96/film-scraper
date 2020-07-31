@@ -1,5 +1,5 @@
 # Movie Scraper -> Dataset collection
-General purpose website scraper for data analysis purposes
+General purpose website scraper for data analysis purposes using Scrapy
 
 This program will take data from the Online Movie Database (OMDB) and Box Office Mojo, merging them into a single dataset.
 
