@@ -1,10 +1,9 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-import utils
 
 if __name__ == '__main__':
 
-    utils.create_data_folder()
+    #utils.create_data_folder()
     
     process = CrawlerProcess(get_project_settings())
 
